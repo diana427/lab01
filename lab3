@@ -1,0 +1,52 @@
+using System;
+
+namespace Lab3
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            Arc arc = new Arc(15, 60, 17, 25); //задаємо дугу
+            arc.Show(); // методом Show виводимо дані дуги
+            Console.ReadKey();
+        }
+    }
+
+    public abstract class CGraphicsObject //абстрактний клас
+    {
+        public int DotA { get; set; } 
+        public int DotB { get; set; }
+        public CGraphicsObject(int dotA, int dotB) //конструктор класу CGraphicsObject
+        {
+            DotA = dotA;
+            DotB = dotB;
+        }
+    }
+
+    public class CPoint : CGraphicsObject 
+    {
+        public int CentralCorner { get; set; }
+        public CPoint(int centralCorner, int dotA, int dotB) //конструктор класу CPoint
+            : base(dotA, dotB)
+        {
+            
+            CentralCorner = centralCorner;
+        }
+    }
+
+    public class Arc : CPoint
+    {
+        public int Rad { get; set; }
+        public Arc(int rad, int centralCorner, int dotA, int dotB) //конструктор класу Arc
+            : base(centralCorner, dotA, dotB)
+        {
+            Rad = rad;
+        }
+        public void Show() // метод виводу
+        {
+            Console.WriteLine("Радиус: " + Rad + "\tЦентральний кут: " + CentralCorner + "\tТочка А: " + DotA + "\tТочка B: " + DotB);
+        }
+    }
+}
