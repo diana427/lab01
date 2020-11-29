@@ -1,0 +1,109 @@
+using System;
+
+namespace Lab3
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Ellipse myEllipse = new Ellipse(20, 12);
+            myEllipse.Show();
+            myEllipse.areaEllipse(20, 12);
+
+            Trapeze myTrapeze = new Trapeze(18, 9);
+            myTrapeze.Show();
+            myTrapeze.areaTrapeze(18, 9);
+
+            Area a1 = new Area { Value = 754};
+            Area a2 = new Area { Value = 162};
+
+            Area a3 = a1 - a2;
+            Console.WriteLine("Результат вiднiмання площин = " + a3.Value);
+            Console.ReadKey();
+        }
+    }
+
+    public abstract class CGraphicsObject //абстрактний клас CGraphicsObject
+    {
+        public CGraphicsObject()
+        {
+        }
+
+        ~CGraphicsObject()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+    public class CPoint : CGraphicsObject //клас CPoint
+    {
+        public CPoint()
+        {
+        }
+
+        ~CPoint()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class Ellipse : CPoint // клас Ellipse
+    {
+     public int R { get; set; } 
+        public int r { get; set; }
+        public Ellipse(int TallR, int Smallr) //конструктор класу Ellipse
+        {
+            R = TallR;
+	        r = Smallr;
+        }
+    ~Ellipse() //деструктор Ellipse
+        {
+        }
+
+        public void Show() //метод виводу значень
+        {
+            Console.WriteLine("Велика полувiсь: " + R + "" + " Мала полувiсь: " + r);
+        }
+
+        public void areaEllipse(int R, int r)
+        {
+            double area = Math.PI * R * r;
+            Console.WriteLine("Площа еллiпсу = " + area);
+        }
+    }
+
+    public class Trapeze : CPoint // клас Trapeze
+    {
+     public int h { get; set; }
+	 public int l { get; set; }
+	    public Trapeze(int Height, int middleLine) //конструктор класу Trapeze
+        {
+           h = Height;
+           l = middleLine;
+        }
+
+    ~Trapeze() // деструктор Trapeze
+        {
+            
+        }
+        public void Show() //метод виводу значень
+        {
+            Console.WriteLine("Висота трапецiї: " + h + " Середня лiнiя: " + l);
+        }
+        public void areaTrapeze(int h, int l)
+        {
+            double area = h * l;
+            Console.WriteLine("Площа трапецiї = " + area);
+        }
+    }
+
+    public class Area
+    {
+        public int Value { get; set; }
+        public static Area operator -(Area a1, Area a2)
+        {
+            return new Area { Value = a1.Value - a2.Value };
+        }
+       
+    }
+}
