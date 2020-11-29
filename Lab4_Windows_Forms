@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp2
+{
+    
+public partial class Form1 : Form
+    {
+        
+        public Form1()
+        {
+            InitializeComponent();
+           
+           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int R = Convert.ToInt32(textBox1.Text); //задаємо значення у TextBox
+            int r = Convert.ToInt32(textBox2.Text);
+            int H = Convert.ToInt32(textBox3.Text);
+            int l = Convert.ToInt32(textBox4.Text);
+            double areaEllipse = Math.PI * R * r; 
+            if (areaEllipse > 0)
+            {
+                MessageBox.Show("Площа елліпса дорівнює = " + areaEllipse);
+            }
+            else
+            {
+                MessageBox.Show("Значення менше нуля або недопустиме!");
+            }
+            int areaTrapeze = l * H;
+            if (areaTrapeze > 0)
+            {
+                MessageBox.Show("Площа трапеції дорівнює = " + areaTrapeze);
+            }
+            else
+            {
+                MessageBox.Show("Значення менше нуля або недопустиме!");
+            }
+
+            double result = areaEllipse - areaTrapeze;
+            if (result > 0)
+            {
+                MessageBox.Show("Операція '-' дорівнює = " + result);
+            }
+            else
+            {
+                MessageBox.Show("Значення менше нуля або недопустиме!");
+            }
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e) // малюємо фігури у pictureBox1
+        {
+            e.Graphics.DrawEllipse(System.Drawing.Pens.Green, 120, 200, 100, 60);
+            e.Graphics.DrawPolygon(Pens.Blue, new[]{
+            new Point(100, 20),
+            new Point(180, 20),
+            new Point(260, 130),
+            new Point(90, 130)
+        });
+        }
+    }
+}
